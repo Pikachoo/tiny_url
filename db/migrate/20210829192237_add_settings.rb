@@ -4,7 +4,7 @@ class AddSettings < ActiveRecord::Migration[6.1]
       t.string :name
       t.integer :value
     end
-
-    add_index :urls, :name, unique: true
+    
+    add_index :application_settings, :name, unique: true
   end
 end
