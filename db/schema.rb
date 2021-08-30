@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2021_08_29_200703) do
   end
 
   create_table "visits", force: :cascade do |t|
-    t.integer "ipv4"
+    t.bigint "ipv4"
     t.binary "ipv6"
     t.integer "count", default: 1
     t.bigint "url_id"

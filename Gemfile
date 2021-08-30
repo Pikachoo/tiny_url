@@ -22,6 +22,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 5.0.0'
+  gem 'factory_bot_rails', '~> 5.2'
+  gem 'factory_girl_rspec'
+  gem 'faker'
 end
 
 group :development do
@@ -38,6 +41,7 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
+  gem 'database_cleaner-active_record', '~> 1.8'
   gem 'webdrivers'
 end
 

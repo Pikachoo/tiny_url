@@ -1,24 +1,25 @@
 class UrlsController < ApplicationController
+  # POST /urls
   def create
     @tiny_url  = TokenGenerator.new(create_params[:url]).generate
 
     redirect_to root_path + "#{@tiny_url.token}/info"
   end
 
+  # GET /:token
   def open
     render_not_found and return unless tiny_url
+    raise StandardError, 'Invalid client IP' unless ip_valid?
+
+    ip = IPAddr.new(request.remote_ip)
 
     # create visit
-    ip = IPAddr.new(request.remote_ip)
     if ip.ipv4?
       column_name = :ipv4
       value = ip.to_i
     elsif ip.ipv6?
       column_name = :ipv6
       value = ip.hton
-    else
-      logger.error StandardError, 'Invalid IP address'
-      return
     end
 
     visit = tiny_url.visits.find_or_initialize_by(column_name =>  value)
@@ -28,6 +29,7 @@ class UrlsController < ApplicationController
     redirect_to tiny_url.original
   end
 
+  # GET /:token/info
   def show
     tiny_url
   end
@@ -44,5 +46,13 @@ class UrlsController < ApplicationController
 
   def url_params
     params.permit(:token)
+  end
+
+  def ip_valid?
+    IPAddr.new(request.remote_ip)
+
+    true
+  rescue
+    false
   end
 end
