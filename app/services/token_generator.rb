@@ -11,14 +11,8 @@ class TokenGenerator
   end
 
   def generate
-    tiny_url = Url.find_or_initialize_by(original: url)
-
-    return  tiny_url unless tiny_url.new_record?
-
-    tiny_url.token = token
-    tiny_url.save
-
-    tiny_url
+    Url.create!(original: url,
+                token: token)
   end
 
   private
