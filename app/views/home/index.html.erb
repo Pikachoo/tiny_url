@@ -1,0 +1,9 @@
+<div  class="ui fluid container">
+  <%= form_with url: "/urls", method: :post, class: "ui form" do |f| %>
+    <div class="field">
+      <%= f.label :url, "URL:" %>
+      <%= f.text_field :url %>
+    </div>
+    <%= f.submit "Encrypt", class: "ui button" %>
+  <% end %>
+</div>

@@ -1,0 +1,35 @@
+<div  class="ui fluid container">
+  <div class="ui grid">
+      <div class="three wide column">
+        Your url
+      </div>
+      <div class="thirteen wide column">
+        <%= @tiny_url.original %>
+      </div>
+      <div class="three wide column">
+        Shortened url
+      </div>
+      <div class="thirteen wide column">
+        <%= link_to(root_url + @tiny_url.token, root_url + @tiny_url.token, data: { turbolinks: false })%>
+      </div>
+      <h3 class="ui header">Visits</h3>
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th>IP</th>
+            <th>Time</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @tiny_url.visits.each do |visit| %>
+          <tr>
+            <td data-label="IP"><%= visit.ip_address %></td>
+            <td data-label="Time"><%= visit.created_at %></td>
+            <td data-label="Count"><%= visit.count %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>
